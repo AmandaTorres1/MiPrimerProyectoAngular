@@ -1,0 +1,80 @@
+<div class="contenedor-principal">
+  <h1>Bienvenidos</h1>
+  <p>Es para un registro de un club de fans de la banda Callejeros</p>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <section>
+      <label for="txtNombre">Nombre y Apellido: *</label>
+      <input id="txtNombre" formControlName="nombre" type="text" placeholder="Ingrese su nombre">
+    </section>
+
+    <section>
+      <label for="txtCorreo">Correo Electrónico: *</label>
+      <input id="txtCorreo" formControlName="email" type="email" placeholder="Ingrese su correo electrónico">
+    </section>
+
+    <div formGroupName="direccion" class="grupo-anidado">
+      <h3>Dirección</h3>
+      <section>
+        <label for="txtCalle">Calle:</label>
+        <input id="txtCalle" formControlName="calle" type="text" placeholder="Ingrese su calle">
+      </section>
+
+      <section>
+        <label for="txtCiudad">Ciudad:</label>
+        <input id="txtCiudad" formControlName="ciudad" type="text" placeholder="Ingrese su ciudad">
+      </section>
+
+      <button type="button" (click)="cargarDireccionPrueba()">
+        Cargar Dirección de Prueba
+      </button>
+    </div>
+
+    <section>
+      <label for="txtEdad">Edad:</label>
+      <input id="txtEdad" formControlName="edad" type="number" min="16" max="100" placeholder="Ingrese su edad">
+    </section>
+
+    <section>
+      <label for="pais">Nacionalidad:</label>
+      <select id="pais" formControlName="pais">
+        <option value="Argentina">Argentina</option>
+        <option value="Uruguay">Uruguay</option>
+        <option value="España">España</option>
+      </select>
+    </section>
+
+    <section>
+      <label>Seleccione su género:</label>
+      <div class="opciones-radio">
+        <label><input type="radio" formControlName="sexo" value="hombre"> Hombre</label>
+        <label><input type="radio" formControlName="sexo" value="mujer"> Mujer</label>
+      </div>
+    </section>
+
+    <div formArrayName="pasatiempos" class="grupo-anidado">
+      <h3>Pasatiempos</h3>
+
+      @for (pasatiempo of pasatiempos.controls; track $index; let i = $index) {
+      <section>
+        <label>Pasatiempo {{ i + 1 }}:</label>
+        <input type="text" formControlName="{{i}}" placeholder="Ej: Escuchar rock, tocar guitarra...">
+      </section>
+      }
+
+      <button type="button" (click)="agregarPasatiempo()">
+        + Agregar Pasatiempo
+      </button>
+    </div>
+
+    <section>
+      <label for="datoAdicional">Dato adicional:</label>
+      <textarea id="datoAdicional" formControlName="datoAdicional" placeholder="Información adicional"></textarea>
+    </section>
+
+    <section>
+      <button type="submit">Enviar</button>
+      <button type="reset">Cancelar</button>
+    </section>
+  </form>
+</div>
